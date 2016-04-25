@@ -46,7 +46,7 @@ TARGET_NO_BOOTLOADER := true
 TARGET_USES_C2D_COMPOSITION := true
 
 # Kernel
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 msm_rtb.filter=0x37 boot_cpus=0-5
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 msm_rtb.filter=0x37 boot_cpus=0-5 androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x00078000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_RAMDISK_OFFSET := 0x02000000
@@ -140,9 +140,8 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/g4-common/bluetooth
 BOARD_RIL_CLASS := ../../../device/lge/g4-common/ril/
 
 # GPS
-TARGET_GPS_HAL_PATH := $(COMMON_PATH)/gps
-BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := msm8992
-TARGET_NO_RPC := true
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
+BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
 
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
@@ -197,6 +196,9 @@ TARGET_INCREASES_COLDBOOT_TIMEOUT := true
 
 # PowerHAL
 TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/tap2wake"
+
+# Sensors
+COMMON_GLOBAL_CFLAGS += -DBOARD_HAS_SENSORS_GROUP
 
 # inherit from the proprietary version
 -include vendor/lge/g4-common/BoardConfigVendor.mk
