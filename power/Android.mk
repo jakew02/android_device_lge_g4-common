@@ -22,7 +22,7 @@ endif
 
 LOCAL_SRC_FILES := power.c
 LOCAL_SHARED_LIBRARIES := liblog libcutils
-LOCAL_MODULE := power.$(TARGET_DEVICE)
+LOCAL_MODULE := power.msm8992
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_RELATIVE_PATH := hw
 
